@@ -9,10 +9,10 @@ using namespace std;
 typedef bool Bool;
 
 class LexicalAnalyzer{
-    int size
+    int size;
 
 public:
-    LexicalAnalyzer(int=0); // default constructor (with parameter)
+    LexicalAnalyzer(int); // default constructor (with parameter)
     vector<Token> acceptedToken;
     vector<Token> getNextToken();
     void printOut();
@@ -21,43 +21,21 @@ public:
     vector<char> fileBuffer;
 };
 
-int main(int syntax, char** error){
-    LexicalAnalyzer object; /*placeholder*/
-    string file;
-    ifstream ll;
-    cout << "enter name of file (like txt): ";
-    getline(cin, file);
-    ll.open(file);
-    if(ll.is_open() and !ll.fail())
-        cout << "done\n";
-    else{
-        cout << "it didn't work\n";
-        exit(1);
-    }
-    
-    return 0;
-    // this is just sample code (I think)
-    /* just to double check:
-    cin.getline(cstring, number) is for c-strings/char arrays
-    getline(cin, stringname) is for std strings
-    */
-}
-
 LexicalAnalyzer::LexicalAnalyzer(int eger){ /*default constructor*/
     size = eger;
 }
 
-//Check is the input character a symbol or not
-Bool LexicalAnalyzer::isSymbol(char c){
-    if (c == '{' or c == '}' or c == '(' or c == ')' or
-        c == '<' or c == '>' or c == '+' or c == '-' or
-        c == '*' or c == '/' or c == '=' or c == '!' or
-        c == '\t'or c == '\n'or c == '"' or c == ';' or
-        c == '\''or c == isspace(c)) 
-        return true;
-    else 
-        return false;
-}
+// //Check is the input character a symbol or not
+// Bool LexicalAnalyzer::isSymbol(char c){
+//     if (c == '{' or c == '}' or c == '(' or c == ')' or
+//         c == '<' or c == '>' or c == '+' or c == '-' or
+//         c == '*' or c == '/' or c == '=' or c == '!' or
+//         (string)c == '\t' or c == "\n" or c == '"' or c == ';' or
+//         c == '\''or c == isspace(c)) 
+//         return true;
+//     else 
+//         return false;
+// }
 
 //Conditional Statements
 Bool LexicalAnalyzer::isOperator(string s){
@@ -96,8 +74,25 @@ void LexicalAnalyzer::printOut(){
         cout << acceptedToken[i].lexer << '\t' << acceptedToken[i].tokenValue << endl;
     }
 }
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 44a616a002244b481a9550fc810572ad31a3890a
+int main(int syntax, char** error){
+    LexicalAnalyzer object(); /*placeholder*/
+    string file;
+    ifstream ll;
+    cout << "enter name of file (like txt): ";
+    getline(cin, file);
+    ll.open(file);
+    if(ll.is_open() and !ll.fail())
+        cout << "done\n";
+    else{
+        cout << "it didn't work\n";
+        exit(1);
+    }
+    
+    return 0;
+    // this is just sample code (I think)
+    /* just to double check:
+    cin.getline(cstring, number) is for c-strings/char arrays
+    getline(cin, stringname) is for std strings
+    */
+}

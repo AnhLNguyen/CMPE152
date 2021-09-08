@@ -1,3 +1,6 @@
+#ifndef TOKEN_H
+#define TOKEN_H
+
 #include<iostream>
 #include<cstdlib>
 #include<string>
@@ -21,3 +24,5 @@ Token::Token(string input, string attr){
     lexer = input;
     tokenValue = attr;
 }
+
+#endif
