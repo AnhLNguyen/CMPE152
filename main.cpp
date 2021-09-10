@@ -52,6 +52,5 @@ vector<Token> LexicalAnalyzer::getNextToken()
 int main()
 {
     // LexicalAnalyzer Lex;
-    cout << "hey guys" << endl;
 
 }
