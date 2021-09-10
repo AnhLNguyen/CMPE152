@@ -42,10 +42,21 @@ vector<Token> LexicalAnalyzer::getNextToken()
         cout << "File is not available." <<endl;
         exit(1);
     }
-    while(inStream.get(c)){ //Push all the characters into fileBuffer vector to handle it later
+    while(inStream.get(c))
+    { //Push all the characters into fileBuffer vector to handle it later
         fileBuffer.push_back(c);
     }
     inStream.close();
+    
+    return acceptedToken;
+}
 
-
+void LexicalAnalyzer::printOut(){
+    int vectorSize = acceptedToken.size();
+    for (int i =1; i< vectorSize;i++){
+        cout << acceptedToken[i].lexer << '\t' << acceptedToken[i].tokenValue << endl;
+    }
+}
+int main(){
+    
 }
