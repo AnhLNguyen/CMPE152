@@ -48,3 +48,10 @@ vector<Token> LexicalAnalyzer::getNextToken()
     inStream.close();
 
 }
+
+int main()
+{
+    // LexicalAnalyzer Lex;
+    cout << "hey guys" << endl;
+
+}
