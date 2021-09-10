@@ -37,15 +37,16 @@ vector<Token> LexicalAnalyzer::getNextToken()
     ifstream inStream;
     char c;
     inStream.open("testInput.txt");
-    if (!inStream) //Prompt error when cannot read the file
-    {
-        cout << "File is not available." <<endl;
+    if (!inStream.is_open() or inStream.fail()){ //Prompt error when cannot read the file
+        cout << "File is not available.\n" ;
         exit(1);
     }
-    while(inStream.get(c))
-    { //Push all the characters into fileBuffer vector to handle it later
+    else
+        cout << "Success\n";
+    
+    while(inStream.get(c)) //Push all the characters into fileBuffer vector to handle it later
         fileBuffer.push_back(c);
-    }
+
     inStream.close();
     
     return acceptedToken;
