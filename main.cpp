@@ -57,11 +57,12 @@ void LexicalAnalyzer::printOut(){
         cout << acceptedToken[i].lexer << '\t' << acceptedToken[i].tokenValue << endl;
     }
 }
-int main(){
+int main(int syntax, char** error){
     string file;
     ifstream ll;
     cout << "enter name of file (like txt): ";
     cin >> file;
+    ll.open(string);
     if(ll.is_open() and !ll.fail())
         cout << "done\n";
     
