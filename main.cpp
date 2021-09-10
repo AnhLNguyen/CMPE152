@@ -47,5 +47,4 @@ vector<Token> LexicalAnalyzer::getNextToken()
     }
     inStream.close();
 
-
 }
