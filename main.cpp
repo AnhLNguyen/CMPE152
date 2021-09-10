@@ -63,7 +63,7 @@ void LexicalAnalyzer::printOut(){
 //Conditional Statements
 bool LexicalAnalyzer::isOperator(string s)
 {
-    if(s == '&&' || s == '||' || s == '==' || s == '!=' || s == '<=' || s == '>=' || s == '+'  || s == '-'  || s == "*"  || s == '/'  || s == '<'  || s == '>'  ||)
+    if(s == "&&" || s == "||" || s == "==" || s == "!=" || s == "<=" || s == ">=" || s == "+"  || s == "-"  || s == "*"  || s == "/"  || s == "<"  || s == ">")
     {
         cout << "Operator:  " << s << endl;
         return true;
