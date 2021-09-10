@@ -58,5 +58,16 @@ void LexicalAnalyzer::printOut(){
     }
 }
 int main(){
-    
+    int n
+    cout << "enter a number: ";
+while(true){
+  cin >> n;
+  if(number==1);
+  else if(number==2);
+  else if(number==3);
+  else if(number==4)
+    break;
+  else
+    cout << "try again: ";
+    // this is just sample code (I think)
 }
