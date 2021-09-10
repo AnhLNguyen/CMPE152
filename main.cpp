@@ -8,16 +8,36 @@
 using namespace std;
 
 class LexicalAnalyzer{
+    int size
     public:
         LexicalAnalyzer();
         vector<Token> acceptedToken;
         vector<Token> getNextToken();
         void printOut();
-        bool isSymbol(char c);
-        bool isOperator(string s);
+        bool isSymbol(char);
+        bool isOperator(string);
         vector<char> fileBuffer;
-        int size;
 };
+
+int main(int syntax, char** error){
+    LexicalAnalyzer object; /*placeholder*/
+    string file;
+    ifstream ll;
+    cout << "enter name of file (like txt): ";
+    getline(cin, file);
+    ll.open(string);
+    if(ll.is_open() and !ll.fail())
+        cout << "done\n";
+    else
+        cout << "it didn't work\n";
+    
+    return 0;
+    // this is just sample code (I think)
+    /* just to double check:
+    cin.getline(cstring, number) is for c-strings/char arrays
+    getline(cin, stringname) is for std strings
+    */
+}
 
 //Check is the input character a symbol or not
 bool LexicalAnalyzer::isSymbol(char c){
@@ -32,8 +52,7 @@ bool LexicalAnalyzer::isSymbol(char c){
 }
 
 //stream input file to characters function (getNextToken)
-vector<Token> LexicalAnalyzer::getNextToken()
-{
+vector<Token> LexicalAnalyzer::getNextToken(){
     //Scan all the character 
     ifstream inStream;
     char c;
@@ -61,32 +80,11 @@ void LexicalAnalyzer::printOut(){
 }
 
 //Conditional Statements
-bool LexicalAnalyzer::isOperator(string s)
-{
+bool LexicalAnalyzer::isOperator(string s){
     if(s == "&&" || s == "||" || s == "==" || s == "!=" || s == "<=" || s == ">=" || s == "+"  || s == "-"  || s == "*"  || s == "/"  || s == "<"  || s == ">")
     {
         cout << "Operator:  " << s << endl;
         return true;
     }else
         return false;
-}
-
-int main(int syntax, char** error){
-    LexicalAnalyzer object; /*placeholder*/
-    string file;
-    ifstream ll;
-    cout << "enter name of file (like txt): ";
-    getline(cin, file);
-    ll.open(string);
-    if(ll.is_open() and !ll.fail())
-        cout << "done\n";
-    else
-        cout << "it didn't work\n";
-    
-    return 0;
-    // this is just sample code (I think)
-    /* just to double check:
-    cin.getline(cstring, number) is for c-strings/char arrays
-    getline(cin,stringname) is for std strings
-    */
 }
