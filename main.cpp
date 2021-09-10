@@ -19,11 +19,11 @@ class LexicalAnalyzer{
 
 //Check is the input character a symbol or not
 bool LexicalAnalyzer::isSymbol(char c){
-    if (c == '{' || c == '}' || c == '(' || c == ')' ||
-        c == '<' || c == '>' || c == '+' || c == '-' ||
-        c == '*' || c == '/' || c == '=' || c == '!' ||
-        c == '\t'|| c == '\n'|| c == '"' || c == ';' ||
-        c == '\''|| c == isspace(c)) 
+    if (c == '{' or c == '}' or c == '(' or c == ')' or
+        c == '<' or c == '>' or c == '+' or c == '-' or
+        c == '*' or c == '/' or c == '=' or c == '!' or
+        c == '\t'or c == '\n'or c == '"' or c == ';' or
+        c == '\''or c == isspace(c)) 
         return true;
     else 
         return false;
