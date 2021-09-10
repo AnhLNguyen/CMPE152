@@ -69,4 +69,8 @@ int main(int syntax, char** error){
     
     return 0;
     // this is just sample code (I think)
+    /* just to double check:
+    cin.getline(cstring, number) is for c-strings/char arrays
+    getline(cin,stringname) is for std strings
+    */
 }
