@@ -4,6 +4,7 @@
 #include <fstream>
 #include <cstdlib>
 #include "token.h"
+#include <stack>
 using namespace std;
 
 class LexicalAnalyzer{
@@ -20,15 +21,14 @@ class LexicalAnalyzer{
 
 //Check is the input character a symbol or not
 bool LexicalAnalyzer::isSymbol(char c){
-    if (c == '{' || c == '}' || c == '(' || c == ')' ||
-        c == '<' || c == '>' || c == '+' || c == '-' ||
-        c == '*' || c == '/' || c == '=' || c == '!' ||
-        c == '\t'|| c == '\n'|| c == '"' || c == ';' ||
-        c == '\''|| c == isspace(c)) 
+    if (c == '{' or c == '}' or c == '(' or c == ')' or
+        c == '<' or c == '>' or c == '+' or c == '-' or
+        c == '*' or c == '/' or c == '=' or c == '!' or
+        c == '\t'or c == '\n'or c == '"' or c == ';' or
+        c == '\''or c == isspace(c)) 
         return true;
     else 
         return false;
-    return 0;
 }
 
 //stream input file to characters function (getNextToken)
@@ -38,15 +38,16 @@ vector<Token> LexicalAnalyzer::getNextToken()
     ifstream inStream;
     char c;
     inStream.open("testInput.txt");
-    if (!inStream) //Prompt error when cannot read the file
-    {
-        cout << "File is not available." <<endl;
+    if (!inStream.is_open() or inStream.fail()){ //Prompt error when cannot read the file
+        cout << "File is not available.\n" ;
         exit(1);
     }
-    while(inStream.get(c))
-    { //Push all the characters into fileBuffer vector to handle it later
+    else
+        cout << "Success\n";
+    
+    while(inStream.get(c)) //Push all the characters into fileBuffer vector to handle it later
         fileBuffer.push_back(c);
-    }
+
     inStream.close();
     
     return acceptedToken;
@@ -70,7 +71,22 @@ bool LexicalAnalyzer::isOperator(string s)
         return false;
 }
 
-
-int main(){
+int main(int syntax, char** error){
+    LexicalAnalyzer object; /*placeholder*/
+    string file;
+    ifstream ll;
+    cout << "enter name of file (like txt): ";
+    getline(cin, file);
+    ll.open(string);
+    if(ll.is_open() and !ll.fail())
+        cout << "done\n";
+    else
+        cout << "it didn't work\n";
     
+    return 0;
+    // this is just sample code (I think)
+    /* just to double check:
+    cin.getline(cstring, number) is for c-strings/char arrays
+    getline(cin,stringname) is for std strings
+    */
 }
