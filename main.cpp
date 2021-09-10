@@ -65,6 +65,8 @@ int main(int syntax, char** error){
     ll.open(string);
     if(ll.is_open() and !ll.fail())
         cout << "done\n";
+    else
+        cout << "it didn't work\n";
     
     return 0;
     // this is just sample code (I think)
