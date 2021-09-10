@@ -31,6 +31,17 @@ bool LexicalAnalyzer::isSymbol(char c){
         return false;
 }
 
+//Conditional Statements
+bool LexicalAnalyzer::isOperator(string s)
+{
+    if(s == "&&" || s == "||" || s == "==" || s == "!=" || s == "<=" || s == ">=" || s == "+"  || s == "-"  || s == "*"  || s == "/"  || s == "<"  || s == ">")
+    {
+        cout << "Operator:  " << s << endl;
+        return true;
+    }else
+        return false;
+}
+
 //stream input file to characters function (getNextToken)
 vector<Token> LexicalAnalyzer::getNextToken()
 {
@@ -60,24 +71,13 @@ void LexicalAnalyzer::printOut(){
     }
 }
 
-//Conditional Statements
-bool LexicalAnalyzer::isOperator(string s)
-{
-    if(s == "&&" || s == "||" || s == "==" || s == "!=" || s == "<=" || s == ">=" || s == "+"  || s == "-"  || s == "*"  || s == "/"  || s == "<"  || s == ">")
-    {
-        cout << "Operator:  " << s << endl;
-        return true;
-    }else
-        return false;
-}
-
 int main(int syntax, char** error){
     LexicalAnalyzer object; /*placeholder*/
     string file;
     ifstream ll;
     cout << "enter name of file (like txt): ";
     getline(cin, file);
-    ll.open(string);
+    ll.open(file);
     if(ll.is_open() and !ll.fail())
         cout << "done\n";
     else
