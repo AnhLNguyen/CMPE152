@@ -49,8 +49,13 @@ vector<Token> LexicalAnalyzer::getNextToken()
 
 }
 
+//Conditional Statements
+
+
 int main()
 {
     // LexicalAnalyzer Lex;
+    cout << "hey guys" << endl;
+    cout << "sth else." << endl;
 
 }
