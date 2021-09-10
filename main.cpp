@@ -54,8 +54,8 @@ bool LexicalAnalyzer::isSymbol(char c){
 //Conditional Statements
 bool LexicalAnalyzer::isOperator(string s)
 {
-    if(s == "&&" || s == "||" || s == "==" || s == "!=" || s == "<=" || s == ">=" || s == "+"  || s == "-"  || s == "*"  || s == "/"  || s == "<"  || s == ">")
-    {
+    if(s == "&&" or s=="and" or s == "||" or s == "or" or s == "==" or s == "!=" or s == "<="
+    or s == ">=" or s == "+"  or s == "-" or s == "*"  or s == "/"  or s == "<"  or s == ">"){
         cout << "Operator:  " << s << endl;
         return true;
     }else
@@ -89,5 +89,8 @@ void LexicalAnalyzer::printOut(){
         cout << acceptedToken[i].lexer << '\t' << acceptedToken[i].tokenValue << endl;
     }
 }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 44a616a002244b481a9550fc810572ad31a3890a
