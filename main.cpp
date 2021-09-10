@@ -57,6 +57,7 @@ void LexicalAnalyzer::printOut(){
     }
 }
 int main(int syntax, char** error){
+    LexicalAnalyzer object; /*placeholder*/
     string file;
     ifstream ll;
     cout << "enter name of file (like txt): ";
