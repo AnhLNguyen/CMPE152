@@ -4,6 +4,7 @@
 #include <fstream>
 #include <cstdlib>
 #include "token.h"
+#include <stack>
 using namespace std;
 
 class LexicalAnalyzer{
