@@ -61,7 +61,7 @@ int main(int syntax, char** error){
     string file;
     ifstream ll;
     cout << "enter name of file (like txt): ";
-    cin >> file;
+    getline(cin, file);
     ll.open(string);
     if(ll.is_open() and !ll.fail())
         cout << "done\n";
