@@ -27,7 +27,6 @@ bool LexicalAnalyzer::isSymbol(char c){
         return true;
     else 
         return false;
-    return 0;
 }
 
 //stream input file to characters function (getNextToken)
