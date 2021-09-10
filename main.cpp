@@ -13,6 +13,7 @@ class LexicalAnalyzer{
         vector<Token> getNextToken();
         void printOut();
         bool isSymbol(char c);
+        bool isOperator(string s);
         vector<char> fileBuffer;
         int size;
 };
@@ -42,20 +43,34 @@ vector<Token> LexicalAnalyzer::getNextToken()
         cout << "File is not available." <<endl;
         exit(1);
     }
-    while(inStream.get(c)){ //Push all the characters into fileBuffer vector to handle it later
+    while(inStream.get(c))
+    { //Push all the characters into fileBuffer vector to handle it later
         fileBuffer.push_back(c);
     }
     inStream.close();
+    
+    return acceptedToken;
+}
 
+void LexicalAnalyzer::printOut(){
+    int vectorSize = acceptedToken.size();
+    for (int i =1; i< vectorSize;i++){
+        cout << acceptedToken[i].lexer << '\t' << acceptedToken[i].tokenValue << endl;
+    }
 }
 
 //Conditional Statements
-
-
-int main()
+bool LexicalAnalyzer::isOperator(string s)
 {
-    // LexicalAnalyzer Lex;
-    cout << "hey guys" << endl;
-    cout << "sth else." << endl;
+    if(s == '&&' || s == '||' || s == '==' || s == '!=' || s == '<=' || s == '>=' || s == '+'  || s == '-'  || s == "*"  || s == '/'  || s == '<'  || s == '>'  ||)
+    {
+        cout << "Operator:  " << s << endl;
+        return true;
+    }else
+        return false;
+}
 
+
+int main(){
+    
 }
