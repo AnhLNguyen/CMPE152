@@ -28,8 +28,10 @@ int main(int syntax, char** error){
     ll.open(file);
     if(ll.is_open() and !ll.fail())
         cout << "done\n";
-    else
+    else{
         cout << "it didn't work\n";
+        exit(1);
+    }
     
     return 0;
     // this is just sample code (I think)
