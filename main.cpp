@@ -12,7 +12,7 @@ class LexicalAnalyzer{
     int size
 
 public:
-    LexicalAnalyzer(int=0);
+    LexicalAnalyzer(int=0); // default constructor (with parameter)
     vector<Token> acceptedToken;
     vector<Token> getNextToken();
     void printOut();
