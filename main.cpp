@@ -12,7 +12,7 @@ class LexicalAnalyzer{
     int size
 
 public:
-    LexicalAnalyzer();
+    LexicalAnalyzer(int=0);
     vector<Token> acceptedToken;
     vector<Token> getNextToken();
     void printOut();
@@ -43,8 +43,8 @@ int main(int syntax, char** error){
     */
 }
 
-LexicalAnalyzer::LexicalAnalyzer(){ /*default constructor*/
-    size = 0;
+LexicalAnalyzer::LexicalAnalyzer(int eger){ /*default constructor*/
+    size = eger;
 }
 
 //Check is the input character a symbol or not
