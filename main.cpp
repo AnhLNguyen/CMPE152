@@ -6,17 +6,18 @@
 #include "token.h"
 #include <stack>
 using namespace std;
+typedef bool Bool;
 
 class LexicalAnalyzer{
     int size
-    public:
-        LexicalAnalyzer();
-        vector<Token> acceptedToken;
-        vector<Token> getNextToken();
-        void printOut();
-        bool isSymbol(char);
-        bool isOperator(string);
-        vector<char> fileBuffer;
+public:
+    LexicalAnalyzer();
+    vector<Token> acceptedToken;
+    vector<Token> getNextToken();
+    void printOut();
+    Bool isSymbol(char);
+    Bool isOperator(string);
+    vector<char> fileBuffer;
 };
 
 int main(int syntax, char** error){
@@ -42,7 +43,7 @@ int main(int syntax, char** error){
 }
 
 //Check is the input character a symbol or not
-bool LexicalAnalyzer::isSymbol(char c){
+Bool LexicalAnalyzer::isSymbol(char c){
     if (c == '{' or c == '}' or c == '(' or c == ')' or
         c == '<' or c == '>' or c == '+' or c == '-' or
         c == '*' or c == '/' or c == '=' or c == '!' or
@@ -54,8 +55,7 @@ bool LexicalAnalyzer::isSymbol(char c){
 }
 
 //Conditional Statements
-bool LexicalAnalyzer::isOperator(string s)
-{
+Bool LexicalAnalyzer::isOperator(string s){
     if(s == "&&" or s=="and" or s == "||" or s == "or" or s == "==" or s == "!=" or s == "<="
     or s == ">=" or s == "+"  or s == "-" or s == "*"  or s == "/"  or s == "<"  or s == ">"){
         cout << "Operator:  " << s << endl;
