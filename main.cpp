@@ -10,6 +10,7 @@ typedef bool Bool;
 
 class LexicalAnalyzer{
     int size
+
 public:
     LexicalAnalyzer();
     vector<Token> acceptedToken;
@@ -40,6 +41,10 @@ int main(int syntax, char** error){
     cin.getline(cstring, number) is for c-strings/char arrays
     getline(cin, stringname) is for std strings
     */
+}
+
+LexicalAnalyzer::LexicalAnalyzer(){ /*default constructor*/
+    size = 0;
 }
 
 //Check is the input character a symbol or not
