@@ -20,6 +20,11 @@ class LexicalAnalyzer{
         vector<char> fileBuffer;
 };
 
+LexicalAnalyzer::LexicalAnalyzer()
+{
+
+}
+
 void LexicalAnalyzer::ReadFile() {
     //Scan all the character 
     ifstream inStream;
