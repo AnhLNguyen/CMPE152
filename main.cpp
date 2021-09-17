@@ -22,17 +22,12 @@ public:
     vector<char> fileBuffer;
 };
 
-LexicalAnalyzer::LexicalAnalyzer()
-{
-
-}
-
 void LexicalAnalyzer::ReadFile() {
     //Scan all the character 
     ifstream inStream;
     char c;
     inStream.open("testInput.txt");
-    if (!inStream.is_open() || inStream.fail()) { //Prompt error when cannot read the file
+    if (!inStream.is_open() or inStream.fail()) { //Prompt error when cannot read the file
         cout << "File is not available.\n";
         exit(1);
     }
@@ -49,7 +44,8 @@ void LexicalAnalyzer::ReadFile() {
     /*for (int i = 0; i < fileBuffer.size(); i++) {
         cout << fileBuffer[i];
     }
-    cout << endl;*/
+    cout << endl;
+    keep this just in case*/
 }
 
 //stream input file to characters function (getNextToken)
