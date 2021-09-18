@@ -8,7 +8,7 @@
 using namespace std;
 
 class LexicalAnalyzer{
-    int size
+    int size;
     public:
         LexicalAnalyzer();
         vector<Token> acceptedToken;
@@ -89,8 +89,3 @@ void LexicalAnalyzer::printOut(){
         cout << acceptedToken[i].lexer << '\t' << acceptedToken[i].tokenValue << endl;
     }
 }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 44a616a002244b481a9550fc810572ad31a3890a
