@@ -4,170 +4,323 @@
 #include <fstream>
 #include <cstdlib>
 #include "token.h"
-#include <stack>
 using namespace std;
 
-class LexicalAnalyzer {
-    int size;
-public:
-    LexicalAnalyzer();
-    vector<Token> acceptedToken;
-    vector<Token> getNextToken();
-    void ReadFile();
-    void printOut();
-    bool isSymbol(string);
-    bool isOperator(string);
-    string get_Op(string);
-    bool isNumber(string);
-    vector<char> fileBuffer;
+class LexicalAnalyzer{
+    public:
+        LexicalAnalyzer();
+        vector<Token> acceptedToken;
+        vector<Token> getNextToken();
+        void printOut();
+        bool isSymbol(char c);
+        vector<char> fileBuffer;
+        int size;
 };
+//Default Constructor 
+LexicalAnalyzer::LexicalAnalyzer()
+{
+    acceptedToken.push_back(Token("",""));
+    size = 0;
+}
 
-void LexicalAnalyzer::ReadFile() {
+//Check is the input character a symbol or not
+bool LexicalAnalyzer::isSymbol(char c){
+    if (c == '{' || c == '}'){
+        return true;
+    }
+    else if(c == '(' || c == ')'){
+           return true;
+       }
+    else if(c == '/' || c == '<'){
+        return true;
+    }
+    else if(c == '+' || c == '-'){
+        return true;
+    }
+    else if(c == '*' || c == '\t'){
+           return true;
+       }
+    else if(c == '>' || c == '='){
+        return true;
+    }
+    else if(c == '!' || c == ';'){
+        return true;
+    }
+    else if(c  == '"' || c =='\''
+            ){
+        return true;
+    }
+    else if( isspace(c)|| c == '\n'){
+           return true;
+       }
+    else{
+        return false;
+    }
+    return 0;
+}
+
+//stream input file to characters function (getNextToken)
+vector<Token> LexicalAnalyzer::getNextToken()
+{
     //Scan all the character 
     ifstream inStream;
     char c;
     inStream.open("testInput.txt");
-    if (!inStream.is_open() or inStream.fail()) { //Prompt error when cannot read the file
-        cout << "File is not available.\n";
+    if (!inStream) //Prompt error when cannot read the file
+    {
+        cout << "File is not available." <<endl;
         exit(1);
     }
-    else
-        cout << "Success\n\n";
-
-    while (inStream.get(c)) {
-        //Push all the characters into fileBuffer vector to handle it later
+    while(inStream.get(c))
+    { //Push all the characters into fileBuffer vector to handle it later
         fileBuffer.push_back(c);
     }
-
     inStream.close();
-
-    /*for (int i = 0; i < fileBuffer.size(); i++) {
-        cout << fileBuffer[i];
-    }
-    cout << endl;
-    keep this just in case*/
-}
-
-//stream input file to characters function (getNextToken)
-vector<Token> LexicalAnalyzer::getNextToken() {
-    ReadFile();
-    Token t;
-    string s = "";
     
-    for (int i = 0; i < fileBuffer.size(); i++) {
-        if (s == "\t" || s == "\n" || s == " ") {
-            s = "";
-            continue;
-        }
-        else if (isSymbol(s)) {
-            //cout << "String: " << s << endl;
-            t.lexer = t.tokenValue = s;
-            acceptedToken.push_back(t);
-            s = "";
-        }
-        else if (isOperator(s)) {
-            //cout << "String: " << s << endl;
-            t.lexer = get_Op(s);
-            t.tokenValue = s;
-            acceptedToken.push_back(t);
-            s = "";
-        }
-        else if (isNumber(s)) {
-            //cout << "String: " << s << endl;
-            t.lexer = "NUM";
-            t.tokenValue = s;
-            acceptedToken.push_back(t);
-            s = "";
-        }
-        else if (s == "int" || s == "float" || s == "bool") {
-            //cout << "String: " << s << endl;
-            t.lexer = "BASE_TYPE";
-            t.tokenValue = s;
-            acceptedToken.push_back(t);
-            s = "";
-        }
-        else if (s == "if" || s == "else" || s == "while" || s == "do" || s == "true" || s == "false") {
-            //cout << "String: " << s << endl;
-            string temp = "";
-            for (int i = 0; i < s.size(); i++) {
-                char x;
-                x = s[i] - 32;
-                temp += x;
+    //Check for keyword
+    int size = fileBuffer.size();
+    for (int i = 0; i<size ;i++)
+    {
+        string temp = "";//used for storing symbols/letters
+        if(isalpha(fileBuffer[i]))
+        {
+            int j = 0;
+            for (j=i;j<size;j++)
+            {
+                if(!isalpha(fileBuffer[j]))
+                {
+                    if(!isSymbol(fileBuffer[j]))
+                    {
+                        temp+= fileBuffer[j];
+                    }
+                    else 
+                        break;
+                }else 
+                temp+= fileBuffer[j];
             }
-            t.lexer = t.tokenValue = temp;
-            acceptedToken.push_back(t);
-            s = "";
+            i = j-1;
+            if (temp == "while")
+            {
+                Token token(temp,"WHILE");
+                acceptedToken.push_back(token);
+            }
+            else if (temp == "int")
+            {
+                Token token(temp,"BASE_TYPE");
+                acceptedToken.push_back(token);
+            }
+            else if (temp == "float")
+            {
+                Token token(temp,"BASE_TYPE");
+                acceptedToken.push_back(token);
+            }
+            else if (temp == "bool")
+            {
+                Token token(temp,"BASE_TYPE");
+                acceptedToken.push_back(token);
+            }
+            else if (temp == "true")
+            {
+                Token token(temp,"TRUE");
+                acceptedToken.push_back(token);
+            }
+            else if (temp == "do")
+            {
+                Token token(temp,"DO");
+                acceptedToken.push_back(token);
+            }
+            else if (temp == "false")
+            {
+                Token token(temp,"FALSE");
+                acceptedToken.push_back(token);
+            }
+            else if (temp == "else")
+            {
+                Token token(temp,"ELSE");
+                acceptedToken.push_back(token);
+            }
+            else if (temp == "break")
+            {
+                Token token(temp,"BREAK");
+                acceptedToken.push_back(token);
+            }
+            else if (temp == "if")
+            {
+                Token token(temp,"IF");
+                acceptedToken.push_back(token);
+            }
+            else
+            {
+                Token token(temp,"ID");
+                acceptedToken.push_back(token);
+            }
         }
-        else if () {
-
+//check to see if the token is an identifier
+        else if (isdigit(fileBuffer[i]))
+        {
+            int j = 0;
+            for (j = i;j < size; j++)
+            {
+                if(!isdigit(fileBuffer[j])) // until reaching a character that is not number
+                {
+                    if(!isSymbol(fileBuffer[j])){
+                        temp += fileBuffer[j];
+                    }else break;
+                }else temp += fileBuffer[j];
+            }
+            int found = temp.find('.');
+            i = j-1;
+            if (found != -1)
+            {
+                Token token(temp,"REAL");
+                acceptedToken.push_back(token);
+            }
+            else
+            {
+                Token token(temp,"NUM");
+                acceptedToken.push_back(token);
+            }
         }
-
-        s += fileBuffer[i];
+        else if (fileBuffer[i] == '{' || fileBuffer[i] == '}')
+        {
+            string symbol(1,fileBuffer[i]);
+            Token token(symbol, symbol);
+            acceptedToken.push_back(token);
+        }
+        else if (fileBuffer[i] == ';' || fileBuffer[i] == '+')
+        {
+            string symbol(1,fileBuffer[i]);
+            Token token(symbol, symbol);
+            acceptedToken.push_back(token);
+        }
+        else if (fileBuffer[i] == '-' || fileBuffer[i] == '*')
+        {
+            string symbol(1,fileBuffer[i]);
+            Token token(symbol, symbol);
+            acceptedToken.push_back(token);
+        }
+        else if (fileBuffer[i] == '(' || fileBuffer[i] == ')')
+        {
+            string symbol(1,fileBuffer[i]);
+            Token token(symbol, symbol);
+            acceptedToken.push_back(token);
+        }
+        else if (fileBuffer[i] == '/')
+        {
+            string symbol(1,fileBuffer[i]);
+            Token token(symbol, symbol);
+            acceptedToken.push_back(token);
+        }
+        else if (fileBuffer[i] == '|')
+        {
+            temp += fileBuffer[i];
+            if (fileBuffer[i+1] == '|')
+            {
+            Token token(temp, "OR");
+            acceptedToken.push_back(token);
+            }
+            else continue;
+        }
+        else if (fileBuffer[i] == '!')
+        {
+            temp += fileBuffer[i];
+            if (fileBuffer[i+1] == '=')
+            {
+                temp +=fileBuffer[i+1];
+                Token token(temp,"NE");
+                acceptedToken.push_back(token);
+                i = i+1;
+            }
+            else
+            {
+                Token token(temp,temp);
+                acceptedToken.push_back(token);
+            }
+        }
+        else if(fileBuffer[i] == '>' || fileBuffer[i] == '<')
+        {
+            temp = fileBuffer[i];
+            if(fileBuffer[i] == '>')
+            {
+                if (fileBuffer[i+1] == '=')
+                {
+                    temp += fileBuffer[i+1];
+                    Token token(temp,"GE");
+                    acceptedToken.push_back(token);
+                    i = i+1;
+                }
+                else
+                {
+                    Token token(temp,temp);
+                    acceptedToken.push_back(token);
+                }
+            }
+            else if (fileBuffer[i] == '<')
+            {
+                if (fileBuffer[i+1] == '=')
+                {
+                    temp += fileBuffer[i+1];
+                    Token token(temp,"LE");
+                    acceptedToken.push_back(token);
+                    i = i+1;
+                }
+                else
+                {
+                    string symbol(1,fileBuffer[i]);
+                    Token token(symbol,symbol);
+                    acceptedToken.push_back(token);
+                }
+            }
+        }
+        else if(fileBuffer[i] == '&')
+        {
+            temp+= fileBuffer[i];
+            if (fileBuffer[i+1] == '&')
+            {
+                temp += fileBuffer[i+1];
+                Token token(temp,"AND");
+                acceptedToken.push_back(token);
+                i = i+1;
+            }
+            else
+            {
+                Token token(temp,temp);
+                acceptedToken.push_back(token);
+            }
+        }
+        else if (fileBuffer[i] == '=')
+        {
+            temp += fileBuffer[i];
+            if(fileBuffer[i+1] == '=')
+            {
+                temp += fileBuffer[i+1];
+                Token token(temp,"EQ");
+                acceptedToken.push_back(token);
+                i = i+1;
+            }
+            else
+            {
+                Token token(temp,temp);
+                acceptedToken.push_back(token);
+            }
+        }
     }
-
-    for (int i = 0; i < acceptedToken.size(); i++) {
-        cout << acceptedToken[i].lexer << "\t" << acceptedToken[i].tokenValue << endl;
-    }
-    cout << endl;
-
+    Token end("EOF","EOF");
+    acceptedToken.push_back(end);
     return acceptedToken;
 }
-
-//Check is the input character a symbol or not
-bool LexicalAnalyzer::isSymbol(string s) {
-    if (s == "{" || s == "}" || s == "(" || s == ")" ||
-        s == "<" || s == ">" || s == "+" || s == "-" ||
-        s == "*" || s == "/" || s == "=" || s == "\"" ||
-        s == ";" || s == "\'")
-        return true;
-    else
-        return false;
-}
-
-//Conditional Statements
-bool LexicalAnalyzer::isOperator(string s)
-{
-    if (s == "&&" || s == "||" || s == "==" || s == "!=" ||
-        s == "<=" || s == ">=" || s == "+" || s == "-" ||
-        s == "*" || s == "/" || s == "<" || s == ">")
-    {
-        return true;
-    }
-    else
-        return false;
-}
-
-//Get Operator
-string LexicalAnalyzer::get_Op(string s) {
-    if (s == "&&") return "AND";
-    else if (s == "||") return "OR";
-    else if (s == "==") return "EQ";
-    else if (s == "!=") return "NE";
-    else if (s == "<=") return "LE";
-    else if (s == ">=") return "GE";
-}
-
-//Check if a string is a number
-bool LexicalAnalyzer::isNumber(string s) {
-    if (s.size() == 0) return false;
-
-    if (s[1] >= '0' && s[1] <= '9')
-        return true;
-
-    return false;
-}
-
-void LexicalAnalyzer::printOut() {
+//Display output function   
+void LexicalAnalyzer::printOut(){
     int vectorSize = acceptedToken.size();
-    for (int i = 1; i < vectorSize; i++) {
-        cout << acceptedToken[i].lexer << '\t' << acceptedToken[i].tokenValue << endl;
+    for (int i =1; i< vectorSize;i++){
+        cout << acceptedToken[i].tokenValue << '\t' << acceptedToken[i].lexer << endl;
     }
 }
-
-int main(int syntax, char** error) {
-    LexicalAnalyzer Lex;
-    Lex.getNextToken();
-    Lex.printOut();
+int main()
+{
+    LexicalAnalyzer la;
+    la.getNextToken();
+    la.printOut();
 
     return 0;
 }
