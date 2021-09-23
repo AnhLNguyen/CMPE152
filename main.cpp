@@ -15,6 +15,10 @@ class LexicalAnalyzer{
         bool isSymbol(char c);
         vector<char> fileBuffer;
         int size;
+        LexicalAnalyzer operator+;
+        LexicalAnalyzer operator-;
+        LexicalAnalyzer operator*;
+        LexicalAnalyzer operator/;
 };
 //Default Constructor 
 LexicalAnalyzer::LexicalAnalyzer()
