@@ -29,37 +29,27 @@ LexicalAnalyzer::LexicalAnalyzer()
 
 //Check is the input character a symbol or not
 bool LexicalAnalyzer::isSymbol(char c){
-    if (c == '{' || c == '}'){
+    if (c == '{' or c == '}')
         return true;
-    }
-    else if(c == '(' || c == ')'){
+    else if(c == '(' or c == ')')
            return true;
-       }
-    else if(c == '/' || c == '<'){
+    else if(c == '/' or c == '<')
         return true;
-    }
-    else if(c == '+' || c == '-'){
+    else if(c == '+' or c == '-')
         return true;
-    }
-    else if(c == '*' || c == '\t'){
+    else if(c == '*' or c == '\t'
            return true;
-       }
-    else if(c == '>' || c == '='){
+    else if(c == '>' or c == '=')
         return true;
-    }
-    else if(c == '!' || c == ';'){
+    else if(c == '!' or c == ';')
         return true;
-    }
-    else if(c  == '"' || c =='\''
-            ){
+    else if(c  == '"' or c =='\'')
         return true;
-    }
-    else if( isspace(c)|| c == '\n'){
+    else if(isspace(c) or c == '\n')
            return true;
-       }
-    else{
+    else
         return false;
-    }
+            
     return 0;
 }
 
