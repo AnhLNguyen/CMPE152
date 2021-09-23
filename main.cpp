@@ -29,24 +29,10 @@ LexicalAnalyzer::LexicalAnalyzer()
 
 //Check is the input character a symbol or not
 bool LexicalAnalyzer::isSymbol(char c){
-    if (c == '{' or c == '}')
+    if (c == '{' or c == '}' or c == '(' or c == ')' or c == '/' or c == '<'
+        or c == '+' or c == '-' or c == '*' or c == '\t' or c == '>'
+       or c == '=' or c == '!' or c == ';' or c  == '"' or c =='\'' or isspace(c) or c == '\n')
         return true;
-    else if(c == '(' or c == ')')
-           return true;
-    else if(c == '/' or c == '<')
-        return true;
-    else if(c == '+' or c == '-')
-        return true;
-    else if(c == '*' or c == '\t'
-           return true;
-    else if(c == '>' or c == '=')
-        return true;
-    else if(c == '!' or c == ';')
-        return true;
-    else if(c  == '"' or c =='\'')
-        return true;
-    else if(isspace(c) or c == '\n')
-           return true;
     else
         return false;
             
@@ -60,8 +46,7 @@ vector<Token> LexicalAnalyzer::getNextToken()
     ifstream inStream;
     char c;
     inStream.open("testInput.txt");
-    if (!inStream) //Prompt error when cannot read the file
-    {
+    if (!inStream){ //Prompt error when cannot read the file
         cout << "File is not available." <<endl;
         exit(1);
     }
