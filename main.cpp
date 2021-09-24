@@ -6,36 +6,55 @@
 #include "token.h"
 using namespace std;
 
-class LexicalAnalyzer{
-    public:
-        LexicalAnalyzer();
-        vector<Token> acceptedToken;
-        vector<Token> getNextToken();
-        void printOut();
-        bool isSymbol(char c);
-        vector<char> fileBuffer;
-        int size;
-        LexicalAnalyzer operator+;
-        LexicalAnalyzer operator-;
-        LexicalAnalyzer operator*;
-        LexicalAnalyzer operator/;
+class LexicalAnalyzer {
+public:
+    LexicalAnalyzer();
+    vector<Token> acceptedToken;
+    vector<Token> getNextToken();
+    void printOut();
+    bool isSymbol(char c);
+    vector<char> fileBuffer;
+    int size;
 };
 //Default Constructor 
 LexicalAnalyzer::LexicalAnalyzer()
 {
-    acceptedToken.push_back(Token("",""));
+    acceptedToken.push_back(Token("", ""));
     size = 0;
 }
 
 //Check is the input character a symbol or not
-bool LexicalAnalyzer::isSymbol(char c){
-    if (c == '{' or c == '}' or c == '(' or c == ')' or c == '/' or c == '<'
-        or c == '+' or c == '-' or c == '*' or c == '\t' or c == '>'
-       or c == '=' or c == '!' or c == ';' or c  == '"' or c =='\'' or isspace(c) or c == '\n')
+bool LexicalAnalyzer::isSymbol(char c) {
+    if (c == '{' || c == '}') {
         return true;
-    else
+    }
+    else if (c == '(' || c == ')') {
+        return true;
+    }
+    else if (c == '/' || c == '<') {
+        return true;
+    }
+    else if (c == '+' || c == '-') {
+        return true;
+    }
+    else if (c == '*' || c == '\t') {
+        return true;
+    }
+    else if (c == '>' || c == '=') {
+        return true;
+    }
+    else if (c == '!' || c == ';') {
+        return true;
+    }
+    else if (c == '"' || c == '\'') {
+        return true;
+    }
+    else if (c == ' ' || c == '\n') {
+        return true;
+    }
+    else {
         return false;
-            
+    }
     return 0;
 }
 
@@ -46,253 +65,267 @@ vector<Token> LexicalAnalyzer::getNextToken()
     ifstream inStream;
     char c;
     inStream.open("testInput.txt");
-    if (!inStream){ //Prompt error when cannot read the file
-        cout << "File is not available." <<endl;
+    if (!inStream) //Prompt error when cannot read the file
+    {
+        cout << "File is not available." << endl;
         exit(1);
     }
-    while(inStream.get(c))
+    while (inStream.get(c))
     { //Push all the characters into fileBuffer vector to handle it later
         fileBuffer.push_back(c);
     }
     inStream.close();
-    
+
     //Check for keyword
     int size = fileBuffer.size();
-    for (int i = 0; i<size ;i++)
+    for (int i = 0; i < size; i++)
     {
         string temp = "";//used for storing symbols/letters
-        if(isalpha(fileBuffer[i]))
+        if (isalpha(fileBuffer[i]))
         {
             int j = 0;
-            for (j=i;j<size;j++)
+            for (j = i; j < size; j++)
             {
-                if(!isalpha(fileBuffer[j]))
+                if (!isalpha(fileBuffer[j]))
                 {
-                    if(!isSymbol(fileBuffer[j]))
+                    if (!isSymbol(fileBuffer[j]))
                     {
-                        temp+= fileBuffer[j];
+                        temp += fileBuffer[j];
                     }
-                    else 
+                    else
                         break;
-                }else 
-                temp+= fileBuffer[j];
+                }
+                else
+                    temp += fileBuffer[j];
             }
-            i = j-1;
+            i = j - 1;
             if (temp == "while")
             {
-                Token token(temp,"WHILE");
+                Token token(temp, "WHILE");
                 acceptedToken.push_back(token);
             }
-            else if (temp == "int")
+            else if (temp == "int" || temp == "float" || temp == "bool")
             {
-                Token token(temp,"BASE_TYPE");
-                acceptedToken.push_back(token);
-            }
-            else if (temp == "float")
-            {
-                Token token(temp,"BASE_TYPE");
-                acceptedToken.push_back(token);
-            }
-            else if (temp == "bool")
-            {
-                Token token(temp,"BASE_TYPE");
+                Token token(temp, "BASE_TYPE");
                 acceptedToken.push_back(token);
             }
             else if (temp == "true")
             {
-                Token token(temp,"TRUE");
+                Token token(temp, "TRUE");
                 acceptedToken.push_back(token);
             }
             else if (temp == "do")
             {
-                Token token(temp,"DO");
+                Token token(temp, "DO");
                 acceptedToken.push_back(token);
             }
             else if (temp == "false")
             {
-                Token token(temp,"FALSE");
+                Token token(temp, "FALSE");
                 acceptedToken.push_back(token);
             }
             else if (temp == "else")
             {
-                Token token(temp,"ELSE");
+                Token token(temp, "ELSE");
                 acceptedToken.push_back(token);
             }
             else if (temp == "break")
             {
-                Token token(temp,"BREAK");
+                Token token(temp, "BREAK");
                 acceptedToken.push_back(token);
             }
             else if (temp == "if")
             {
-                Token token(temp,"IF");
+                Token token(temp, "IF");
+                acceptedToken.push_back(token);
+            }
+            else if (temp == "for")
+            {
+                Token token(temp, "FOR");
                 acceptedToken.push_back(token);
             }
             else
             {
-                Token token(temp,"ID");
+                Token token(temp, "ID");
                 acceptedToken.push_back(token);
             }
         }
-//check to see if the token is an identifier
+        //check to see if the token is an identifier
         else if (isdigit(fileBuffer[i]))
         {
             int j = 0;
-            for (j = i;j < size; j++)
+            for (j = i; j < size; j++)
             {
-                if(!isdigit(fileBuffer[j])) // until reaching a character that is not number
+                if (!isdigit(fileBuffer[j])) // until reaching a character that is not number
                 {
-                    if(!isSymbol(fileBuffer[j])){
+                    if (!isSymbol(fileBuffer[j])) {
                         temp += fileBuffer[j];
-                    }else break;
-                }else temp += fileBuffer[j];
+                    }
+                    else break;
+                }
+                else temp += fileBuffer[j];
             }
             int found = temp.find('.');
-            i = j-1;
+            i = j - 1;
             if (found != -1)
             {
-                Token token(temp,"REAL");
+                Token token(temp, "REAL");
                 acceptedToken.push_back(token);
             }
             else
             {
-                Token token(temp,"NUM");
+                Token token(temp, "NUM");
                 acceptedToken.push_back(token);
             }
         }
         else if (fileBuffer[i] == '{' || fileBuffer[i] == '}')
         {
-            string symbol(1,fileBuffer[i]);
+            string symbol(1, fileBuffer[i]);
             Token token(symbol, symbol);
             acceptedToken.push_back(token);
         }
         else if (fileBuffer[i] == ';' || fileBuffer[i] == '+')
         {
-            string symbol(1,fileBuffer[i]);
+            string symbol(1, fileBuffer[i]);
             Token token(symbol, symbol);
             acceptedToken.push_back(token);
         }
         else if (fileBuffer[i] == '-' || fileBuffer[i] == '*')
         {
-            string symbol(1,fileBuffer[i]);
+            string symbol(1, fileBuffer[i]);
             Token token(symbol, symbol);
             acceptedToken.push_back(token);
         }
         else if (fileBuffer[i] == '(' || fileBuffer[i] == ')')
         {
-            string symbol(1,fileBuffer[i]);
+            string symbol(1, fileBuffer[i]);
             Token token(symbol, symbol);
             acceptedToken.push_back(token);
         }
         else if (fileBuffer[i] == '/')
         {
-            string symbol(1,fileBuffer[i]);
+            string symbol(1, fileBuffer[i]);
             Token token(symbol, symbol);
             acceptedToken.push_back(token);
         }
         else if (fileBuffer[i] == '|')
         {
             temp += fileBuffer[i];
-            if (fileBuffer[i+1] == '|')
+            if (fileBuffer[i + 1] == '|')
             {
-            Token token(temp, "OR");
-            acceptedToken.push_back(token);
+                Token token(temp, "OR");
+                acceptedToken.push_back(token);
             }
             else continue;
         }
         else if (fileBuffer[i] == '!')
         {
             temp += fileBuffer[i];
-            if (fileBuffer[i+1] == '=')
+            if (fileBuffer[i + 1] == '=')
             {
-                temp +=fileBuffer[i+1];
-                Token token(temp,"NE");
+                temp += fileBuffer[i + 1];
+                Token token(temp, "NE");
                 acceptedToken.push_back(token);
-                i = i+1;
+                i = i + 1;
             }
             else
             {
-                Token token(temp,temp);
+                Token token(temp, temp);
                 acceptedToken.push_back(token);
             }
         }
-        else if(fileBuffer[i] == '>' || fileBuffer[i] == '<')
+        else if (fileBuffer[i] == '>' || fileBuffer[i] == '<')
         {
             temp = fileBuffer[i];
-            if(fileBuffer[i] == '>')
+            if (fileBuffer[i] == '>')
             {
-                if (fileBuffer[i+1] == '=')
+                if (fileBuffer[i + 1] == '=')
                 {
-                    temp += fileBuffer[i+1];
-                    Token token(temp,"GE");
+                    temp += fileBuffer[i + 1];
+                    Token token(temp, "GE");
                     acceptedToken.push_back(token);
-                    i = i+1;
+                    i = i + 1;
                 }
                 else
                 {
-                    Token token(temp,temp);
+                    Token token(temp, temp);
                     acceptedToken.push_back(token);
                 }
             }
             else if (fileBuffer[i] == '<')
             {
-                if (fileBuffer[i+1] == '=')
+                if (fileBuffer[i + 1] == '=')
                 {
-                    temp += fileBuffer[i+1];
-                    Token token(temp,"LE");
+                    temp += fileBuffer[i + 1];
+                    Token token(temp, "LE");
                     acceptedToken.push_back(token);
-                    i = i+1;
+                    i = i + 1;
                 }
                 else
                 {
-                    string symbol(1,fileBuffer[i]);
-                    Token token(symbol,symbol);
+                    string symbol(1, fileBuffer[i]);
+                    Token token(symbol, symbol);
                     acceptedToken.push_back(token);
                 }
             }
         }
-        else if(fileBuffer[i] == '&')
+        else if (fileBuffer[i] == '&')
         {
-            temp+= fileBuffer[i];
-            if (fileBuffer[i+1] == '&')
+            temp += fileBuffer[i];
+            if (fileBuffer[i + 1] == '&')
             {
-                temp += fileBuffer[i+1];
-                Token token(temp,"AND");
+                temp += fileBuffer[i + 1];
+                Token token(temp, "AND");
                 acceptedToken.push_back(token);
-                i = i+1;
+                i = i + 1;
             }
             else
             {
-                Token token(temp,temp);
+                Token token(temp, temp);
                 acceptedToken.push_back(token);
             }
         }
         else if (fileBuffer[i] == '=')
         {
             temp += fileBuffer[i];
-            if(fileBuffer[i+1] == '=')
+            if (fileBuffer[i + 1] == '=')
             {
-                temp += fileBuffer[i+1];
-                Token token(temp,"EQ");
+                temp += fileBuffer[i + 1];
+                Token token(temp, "EQ");
                 acceptedToken.push_back(token);
-                i = i+1;
+                i = i + 1;
             }
             else
             {
-                Token token(temp,temp);
+                Token token(temp, temp);
                 acceptedToken.push_back(token);
             }
         }
     }
-    Token end("EOF","EOF");
+    Token end("EOF", "EOF");
     acceptedToken.push_back(end);
     return acceptedToken;
 }
 //Display output function   
-void LexicalAnalyzer::printOut(){
+void LexicalAnalyzer::printOut() {
     int vectorSize = acceptedToken.size();
-    for (int i =1; i< vectorSize;i++){
+    for (int i = 1; i < vectorSize; i++) {
         cout << acceptedToken[i].tokenValue << '\t' << acceptedToken[i].lexer << endl;
+    }
+
+    ofstream outStream;
+    outStream.open("testOutput.txt");
+
+    if (!outStream) //Prompt error when cannot read the file
+    {
+        cout << "File is not available." << endl;
+        exit(1);
+    }
+    else
+    {
+        for (int i = 1; i < vectorSize; i++) {
+            outStream << acceptedToken[i].tokenValue << '\t' << acceptedToken[i].lexer << endl;
+        }
     }
 }
 int main()
