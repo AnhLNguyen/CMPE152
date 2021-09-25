@@ -6,23 +6,14 @@
 #include "token.h"
 using namespace std;
 
-<<<<<<< HEAD
 class LexicalAnalyzer {
 public:
     LexicalAnalyzer();
-=======
-class LexicalAnalyzer{
-    int size;
-    
-public:
-    LexicalAnalyzer(int=0);
->>>>>>> a653067e0fade4eca26cfb97ca0fce0d226a3c88
     vector<Token> acceptedToken;
     vector<Token> getNextToken();
     void printOut();
     bool isSymbol(char c);
     vector<char> fileBuffer;
-<<<<<<< HEAD
     int size;
 };
 //Default Constructor 
@@ -30,23 +21,10 @@ LexicalAnalyzer::LexicalAnalyzer()
 {
     acceptedToken.push_back(Token("", ""));
     size = 0;
-=======
-    LexicalAnalyzer operator+(LexicalAnalyzer&);
-    LexicalAnalyzer operator-(LexicalAnalyzer&);
-    LexicalAnalyzer operator*(LexicalAnalyzer&);
-    LexicalAnalyzer operator/(LexicalAnalyzer&);
-    int get_size(); //accessor function
-};
-//Default Constructor 
-LexicalAnalyzer::LexicalAnalyzer(int Size){
-    acceptedToken.push_back(Token("", ""));
-    size = Size;
->>>>>>> a653067e0fade4eca26cfb97ca0fce0d226a3c88
 }
 
 //Check is the input character a symbol or not
 bool LexicalAnalyzer::isSymbol(char c) {
-<<<<<<< HEAD
     if (c == '{' || c == '}') {
         return true;
     }
@@ -78,21 +56,6 @@ bool LexicalAnalyzer::isSymbol(char c) {
         return false;
     }
     return 0;
-=======
-    try{
-        if (c == '{' or c == '}' or c == '(' or c == ')' or c == '/' or c == '<'
-            or c == '+' or c == '-' or c == '*' or c == '\t' or c == '>' or c == '='
-            or c == '!' or c == ';' or c  == '"' or c =='\'' or isspace(c) or c == '\n')
-            return true;
-
-        else
-            throw char;
-    }
-    catch(char){
-        cout << "an exception occurred: " << char << endl;
-        return false;
-    }
->>>>>>> a653067e0fade4eca26cfb97ca0fce0d226a3c88
 }
 
 //stream input file to characters function (getNextToken)
@@ -102,12 +65,8 @@ vector<Token> LexicalAnalyzer::getNextToken()
     ifstream inStream;
     char c;
     inStream.open("testInput.txt");
-<<<<<<< HEAD
     if (!inStream) //Prompt error when cannot read the file
     {
-=======
-    if (!inStream or inStream.fail()){ //Prompt error when cannot read the file
->>>>>>> a653067e0fade4eca26cfb97ca0fce0d226a3c88
         cout << "File is not available." << endl;
         exit(1);
     }
@@ -145,11 +104,7 @@ vector<Token> LexicalAnalyzer::getNextToken()
                 Token token(temp, "WHILE");
                 acceptedToken.push_back(token);
             }
-<<<<<<< HEAD
             else if (temp == "int" || temp == "float" || temp == "bool")
-=======
-            else if (temp == "int" or temp == "float" or temp == "bool")
->>>>>>> a653067e0fade4eca26cfb97ca0fce0d226a3c88
             {
                 Token token(temp, "BASE_TYPE");
                 acceptedToken.push_back(token);
@@ -223,41 +178,25 @@ vector<Token> LexicalAnalyzer::getNextToken()
                 acceptedToken.push_back(token);
             }
         }
-<<<<<<< HEAD
         else if (fileBuffer[i] == '{' || fileBuffer[i] == '}')
-=======
-        else if (fileBuffer[i] == '{' or fileBuffer[i] == '}')
->>>>>>> a653067e0fade4eca26cfb97ca0fce0d226a3c88
         {
             string symbol(1, fileBuffer[i]);
             Token token(symbol, symbol);
             acceptedToken.push_back(token);
         }
-<<<<<<< HEAD
         else if (fileBuffer[i] == ';' || fileBuffer[i] == '+')
-=======
-        else if (fileBuffer[i] == ';' or fileBuffer[i] == '+')
->>>>>>> a653067e0fade4eca26cfb97ca0fce0d226a3c88
         {
             string symbol(1, fileBuffer[i]);
             Token token(symbol, symbol);
             acceptedToken.push_back(token);
         }
-<<<<<<< HEAD
         else if (fileBuffer[i] == '-' || fileBuffer[i] == '*')
-=======
-        else if (fileBuffer[i] == '-' or fileBuffer[i] == '*')
->>>>>>> a653067e0fade4eca26cfb97ca0fce0d226a3c88
         {
             string symbol(1, fileBuffer[i]);
             Token token(symbol, symbol);
             acceptedToken.push_back(token);
         }
-<<<<<<< HEAD
         else if (fileBuffer[i] == '(' || fileBuffer[i] == ')')
-=======
-        else if (fileBuffer[i] == '(' or fileBuffer[i] == ')')
->>>>>>> a653067e0fade4eca26cfb97ca0fce0d226a3c88
         {
             string symbol(1, fileBuffer[i]);
             Token token(symbol, symbol);
@@ -295,11 +234,7 @@ vector<Token> LexicalAnalyzer::getNextToken()
                 acceptedToken.push_back(token);
             }
         }
-<<<<<<< HEAD
         else if (fileBuffer[i] == '>' || fileBuffer[i] == '<')
-=======
-        else if (fileBuffer[i] == '>' or fileBuffer[i] == '<')
->>>>>>> a653067e0fade4eca26cfb97ca0fce0d226a3c88
         {
             temp = fileBuffer[i];
             if (fileBuffer[i] == '>')
@@ -381,7 +316,6 @@ void LexicalAnalyzer::printOut() {
     ofstream outStream;
     outStream.open("testOutput.txt");
 
-<<<<<<< HEAD
     if (!outStream) //Prompt error when cannot read the file
     {
         cout << "File is not available." << endl;
@@ -396,46 +330,9 @@ void LexicalAnalyzer::printOut() {
 }
 int main()
 {
-=======
-    if(outStream and !outStream.fail())
-        for (int C=1; C<=vectorSize-1; C++)
-            outStream << acceptedToken[C].tokenValue << '\t' << acceptedToken[C].lexer << endl;
-    
-    else{
-        cout << "File is not available." << endl; //Prompt error when cannot read the file
-        exit(1);
-    }
-}
-
-LexicalAnalyzer LexicalAnalyzer::operator+(LexicalAnalyzer& a){
-    return LexicalAnalyzer(size+a.size);
-}
-
-LexicalAnalyzer LexicalAnalyzer::operator-(LexicalAnalyzer& A){
-    return LexicalAnalyzer(size-A.size);
-}
-
-LexicalAnalyzer LexicalAnalyzer::operator*(LexicalAnalyzer& b){
-    return LexicalAnalyzer(size*b.size);
-}
-
-LexicalAnalyzer LexicalAnalyzer::operator/(LexicalAnalyzer& B){
-    return LexicalAnalyzer(size/B.size);
-}
-
-int LexicalAnalyzer::get_size(){
-    return size;
-}
-
-int main(int foo, char** bar){
->>>>>>> a653067e0fade4eca26cfb97ca0fce0d226a3c88
     LexicalAnalyzer la;
     la.getNextToken();
     la.printOut();
 
     return 0;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> a653067e0fade4eca26cfb97ca0fce0d226a3c88
