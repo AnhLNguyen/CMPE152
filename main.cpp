@@ -8,7 +8,7 @@ using namespace std;
 
 class LexicalAnalyzer {
 public:
-    LexicalAnalyzer();
+    LexicalAnalyzer(int=0);
     vector<Token> acceptedToken;
     vector<Token> getNextToken();
     void printOut();
@@ -21,44 +21,22 @@ public:
     LexicalAnalyzer operator/;
 };
 //Default Constructor 
-LexicalAnalyzer::LexicalAnalyzer()
+LexicalAnalyzer::LexicalAnalyzer(int Size)
 {
     acceptedToken.push_back(Token("", ""));
-    size = 0;
+    size = Size;
 }
 
 //Check is the input character a symbol or not
 bool LexicalAnalyzer::isSymbol(char c) {
-    if (c == '{' || c == '}') {
+    if (c == '{' or c == '}' or c == '(' or c == ')' or c == '/' or c == '<'
+        or c == '+' or c == '-' or c == '*' or c == '\t' or c == '>' or c == '='
+        or c == '!' or c == ';' or c  == '"' or c =='\'' or isspace(c) or c == '\n')
         return true;
-    }
-    else if (c == '(' || c == ')') {
-        return true;
-    }
-    else if (c == '/' || c == '<') {
-        return true;
-    }
-    else if (c == '+' || c == '-') {
-        return true;
-    }
-    else if (c == '*' || c == '\t') {
-        return true;
-    }
-    else if (c == '>' || c == '=') {
-        return true;
-    }
-    else if (c == '!' || c == ';') {
-        return true;
-    }
-    else if (c == '"' || c == '\'') {
-        return true;
-    }
-    else if (c == ' ' || c == '\n') {
-        return true;
-    }
-    else {
+    
+    else
         return false;
-    }
+        
     return 0;
 }
 
