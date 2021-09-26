@@ -21,21 +21,25 @@ public:
     LexicalAnalyzer operator/(LexicalAnalyzer&);
 };
 //Default Constructor 
-LexicalAnalyzer::LexicalAnalyzer(int Size)
-{
+LexicalAnalyzer::LexicalAnalyzer(int Size){
     acceptedToken.push_back(Token("", ""));
     size = Size;
 }
 
 //Check is the input character a symbol or not
 bool LexicalAnalyzer::isSymbol(char c) {
-    if (c == '{' or c == '}' or c == '(' or c == ')' or c == '/' or c == '<'
-        or c == '+' or c == '-' or c == '*' or c == '\t' or c == '>' or c == '='
-        or c == '!' or c == ';' or c  == '"' or c =='\'' or isspace(c) or c == '\n')
-        return true;
-    
-    else
-        return false;
+    try{
+        if (c == '{' or c == '}' or c == '(' or c == ')' or c == '/' or c == '<'
+            or c == '+' or c == '-' or c == '*' or c == '\t' or c == '>' or c == '='
+            or c == '!' or c == ';' or c  == '"' or c =='\'' or isspace(c) or c == '\n')
+            return true;
+
+        else
+            throw char;
+    }
+    catch(char){
+        cout << "an exception occurred: " << char << endl;
+    }
 }
 
 //stream input file to characters function (getNextToken)
