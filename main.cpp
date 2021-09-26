@@ -6,7 +6,7 @@
 #include "token.h"
 using namespace std;
 
-class LexicalAnalyzer {
+class LexicalAnalyzer{
 public:
     LexicalAnalyzer(int=0);
     vector<Token> acceptedToken;
@@ -15,10 +15,10 @@ public:
     bool isSymbol(char c);
     vector<char> fileBuffer;
     int size;
-    LexicalAnalyzer operator+;
-    LexicalAnalyzer operator-;
-    LexicalAnalyzer operator*;
-    LexicalAnalyzer operator/;
+    LexicalAnalyzer operator+(LexicalAnalyzer&);
+    LexicalAnalyzer operator-(LexicalAnalyzer&);
+    LexicalAnalyzer operator*(LexicalAnalyzer&);
+    LexicalAnalyzer operator/(LexicalAnalyzer&);
 };
 //Default Constructor 
 LexicalAnalyzer::LexicalAnalyzer(int Size)
@@ -307,8 +307,24 @@ void LexicalAnalyzer::printOut() {
         }
     }
 }
-int main()
-{
+
+LexicalAnalyzer LexicalAnalyzer::operator+(LexicalAnalyzer& a){
+    return LexicalAnalyzer(size+a.size);
+}
+
+LexicalAnalyzer LexicalAnalyzer::operator-(LexicalAnalyzer& A){
+    return LexicalAnalyzer(size-A.size);
+}
+
+LexicalAnalyzer LexicalAnalyzer::operator*(LexicalAnalyzer& b){
+    return LexicalAnalyzer(size*b.size);
+}
+
+LexicalAnalyzer LexicalAnalyzer::operator/(LexicalAnalyzer& B){
+    return LexicalAnalyzer(size/B.size);
+}
+
+int main(int foo, char** bar){
     LexicalAnalyzer la;
     la.getNextToken();
     la.printOut();
