@@ -330,6 +330,10 @@ LexicalAnalyzer LexicalAnalyzer::operator/(LexicalAnalyzer& B){
     return LexicalAnalyzer(size/B.size);
 }
 
+int LexicalAnalyzer::get_size(){
+    return size;
+}
+
 int main(int foo, char** bar){
     LexicalAnalyzer la;
     la.getNextToken();
