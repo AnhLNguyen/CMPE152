@@ -41,6 +41,7 @@ bool LexicalAnalyzer::isSymbol(char c) {
     }
     catch(char){
         cout << "an exception occurred: " << char << endl;
+        return false;
     }
 }
 
