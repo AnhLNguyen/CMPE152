@@ -7,6 +7,8 @@
 using namespace std;
 
 class LexicalAnalyzer{
+    int size;
+    
 public:
     LexicalAnalyzer(int=0);
     vector<Token> acceptedToken;
@@ -14,11 +16,11 @@ public:
     void printOut();
     bool isSymbol(char c);
     vector<char> fileBuffer;
-    int size;
     LexicalAnalyzer operator+(LexicalAnalyzer&);
     LexicalAnalyzer operator-(LexicalAnalyzer&);
     LexicalAnalyzer operator*(LexicalAnalyzer&);
     LexicalAnalyzer operator/(LexicalAnalyzer&);
+    int get_size(); //accessor function
 };
 //Default Constructor 
 LexicalAnalyzer::LexicalAnalyzer(int Size){
