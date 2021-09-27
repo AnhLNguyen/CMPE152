@@ -302,7 +302,7 @@ void LexicalAnalyzer::printOut() {
     ofstream outStream;
     outStream.open("testOutput.txt");
 
-    if (!outStream) //Prompt error when cannot read the file
+    if (!outStream or outStream.fail()) //Prompt error when cannot read the file
     {
         cout << "File is not available." << endl;
         exit(1);
