@@ -302,16 +302,13 @@ void LexicalAnalyzer::printOut() {
     ofstream outStream;
     outStream.open("testOutput.txt");
 
-    if (!outStream or outStream.fail()) //Prompt error when cannot read the file
-    {
-        cout << "File is not available." << endl;
+    if(outStream and !outStream.fail())
+        for (int C=1; C<=vectorSize-1; C++)
+            outStream << acceptedToken[C].tokenValue << '\t' << acceptedToken[C].lexer << endl;
+    
+    else{
+        cout << "File is not available." << endl; //Prompt error when cannot read the file
         exit(1);
-    }
-    else
-    {
-        for (int i = 1; i < vectorSize; i++) {
-            outStream << acceptedToken[i].tokenValue << '\t' << acceptedToken[i].lexer << endl;
-        }
     }
 }
 
