@@ -90,7 +90,7 @@ vector<Token> LexicalAnalyzer::getNextToken()
                 Token token(temp, "WHILE");
                 acceptedToken.push_back(token);
             }
-            else if (temp == "int" || temp == "float" || temp == "bool")
+            else if (temp == "int" or temp == "float" or temp == "bool")
             {
                 Token token(temp, "BASE_TYPE");
                 acceptedToken.push_back(token);
@@ -164,25 +164,25 @@ vector<Token> LexicalAnalyzer::getNextToken()
                 acceptedToken.push_back(token);
             }
         }
-        else if (fileBuffer[i] == '{' || fileBuffer[i] == '}')
+        else if (fileBuffer[i] == '{' or fileBuffer[i] == '}')
         {
             string symbol(1, fileBuffer[i]);
             Token token(symbol, symbol);
             acceptedToken.push_back(token);
         }
-        else if (fileBuffer[i] == ';' || fileBuffer[i] == '+')
+        else if (fileBuffer[i] == ';' or fileBuffer[i] == '+')
         {
             string symbol(1, fileBuffer[i]);
             Token token(symbol, symbol);
             acceptedToken.push_back(token);
         }
-        else if (fileBuffer[i] == '-' || fileBuffer[i] == '*')
+        else if (fileBuffer[i] == '-' or fileBuffer[i] == '*')
         {
             string symbol(1, fileBuffer[i]);
             Token token(symbol, symbol);
             acceptedToken.push_back(token);
         }
-        else if (fileBuffer[i] == '(' || fileBuffer[i] == ')')
+        else if (fileBuffer[i] == '(' or fileBuffer[i] == ')')
         {
             string symbol(1, fileBuffer[i]);
             Token token(symbol, symbol);
@@ -220,7 +220,7 @@ vector<Token> LexicalAnalyzer::getNextToken()
                 acceptedToken.push_back(token);
             }
         }
-        else if (fileBuffer[i] == '>' || fileBuffer[i] == '<')
+        else if (fileBuffer[i] == '>' or fileBuffer[i] == '<')
         {
             temp = fileBuffer[i];
             if (fileBuffer[i] == '>')
