@@ -6,6 +6,8 @@
 using namespace std;
 
 int main(int argc, char** argv){
+    char reading[100];
+    unsigned count = 0;
     ifstream fin;
     fin.open("test.txt");
     if(fin and !fin.fail())
@@ -13,6 +15,11 @@ int main(int argc, char** argv){
     else{
         cout << "File could not be opened. Aborting system";
         exit(1);
+    }
+    
+    while(!fin.eof()){
+        fin >> reading[count];
+        count++;
     }fin.close();
     
     argc = 0;
