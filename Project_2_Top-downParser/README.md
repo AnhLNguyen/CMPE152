@@ -1,7 +1,7 @@
 # CMPE152 Team 12
-PROJECT 1: Lexical Analyzer
+PROJECT 2: Top-down Parser
 
-Compiler Design: Lexical Analyzer in C++
+Compiler Design: Top-down Parser in C++
 By An Nguyen, Anh Nguyen, Gia Ly, Timothy Vu
 
 Instructions on how to run it:
