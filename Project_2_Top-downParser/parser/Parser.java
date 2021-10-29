@@ -103,7 +103,9 @@ public class Parser {
          match(Tag.FOR);
          match('(');
          s = stmt();
+         match(';');
          x = allexpr();
+         match(';');
          s1 = stmt();
          match(')');
          s2 = stmt();
