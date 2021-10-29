@@ -3,3 +3,11 @@
     r = a; dd = d;
     while( dd <= r ) dd = 2*dd;
 }
+
+{int r; int dd; int a; int d; int i;r = a; dd = d;for(i=0; i<=r; i=i+1) dd = 2*dd;}
+
+{
+    int r; int dd; int a; int d; int i;
+    r = a; dd = d;
+    for(i=0; i<=r; i=i+1) dd = 2*dd;
+}
