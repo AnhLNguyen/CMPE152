@@ -3,7 +3,7 @@
 PROJECT 2: Top-down Parser
 
 Compiler Design: Top-down Parser in Java
-By An Nguyen, Anh Nguyen, Gia Ly, Timothy Vu
+By Anh Nguyen (leader), Gia Ly, Timothy Vu, and An Nguyen
 
 Instructions on how to run it:
 
