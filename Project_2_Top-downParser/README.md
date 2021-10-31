@@ -3,7 +3,7 @@
 PROJECT 2: Top-down Parser
 
 Compiler Design: Top-down Parser in Java
-By Anh Nguyen (leader), Gia Ly, Timothy Vu, and An Nguyen
+By Anh Nguyen, Timothy Vu, Gia Ly, and An Nguyen
 
 Instructions on how to run it:
 
@@ -32,4 +32,4 @@ Depending on whether you use command line or an IDE, follow one of the below two
          // For example:
          // {int r; int dd; int a; int d;r = a; dd = d;while( dd <= r ) dd = 2*dd;}
 
-2.  If you use Visual Studio IDE
+2.  If you use VsCode IDE

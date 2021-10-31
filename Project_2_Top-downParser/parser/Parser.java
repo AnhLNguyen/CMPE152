@@ -29,7 +29,7 @@ public class Parser {
       if (look.tag == t)
          move();
       else
-         error("syntax error");
+         error("syntax error 1");
    }
 
    public Prog program() throws IOException { // program -> block
@@ -77,7 +77,6 @@ public class Parser {
       Expr x;
       Stmt s, s1, s2;
       Stmt savedStmt; // save enclosing loop for breaks
-
       switch (look.tag) {
 
       case ';':
@@ -163,6 +162,18 @@ public class Parser {
       Id id = top.get(t);
       if (id == null)
          error(t.toString() + " undeclared");
+      if (look.tag == '+' || look.tag == '-') {
+         int temp = look.tag;
+         move();
+         if (look.tag == temp) {
+            Token tok = look;
+            Incdecexpr o = new Incdecexpr(tok);
+            stmt = new Incdec(id, o, o);
+            move();
+            match(';');
+            return stmt;
+         }
+      }
       move();
       stmt = new Set(id, allexpr()); // S -> id = E ;
       match(';');
@@ -176,6 +187,17 @@ public class Parser {
       Id id = top.get(t);
       if (id == null)
          error(t.toString() + " undeclared");
+      if (look.tag == '+' || look.tag == '-') {
+         int temp = look.tag;
+         move();
+         if (look.tag == temp) {
+            Token tok = look;
+            Incdecexpr o = new Incdecexpr(tok);
+            stmt = new Incdec(id, o, o);
+            move();
+            return stmt;
+         }
+      }
       move();
       stmt = new Set(id, allexpr()); // S -> id = E ;
       return stmt;
