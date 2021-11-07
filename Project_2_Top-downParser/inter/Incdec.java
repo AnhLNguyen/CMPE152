@@ -7,14 +7,13 @@ public class Incdec extends Stmt {
     public Id id;
     public Expr expr;
 
-    public Incdec(Id i, Expr x1, Expr x2) {
+    public Incdec(Id i, Expr x) {
         id = i;
-        expr = x1;
+        expr = x;
         if (check(id.type) == null)
             error("type error");
         children.add(id);
         children.add(expr);
-        expr = x2;
         children.add(expr);
     }
 

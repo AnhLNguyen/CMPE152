@@ -29,7 +29,7 @@ public class Parser {
       if (look.tag == t)
          move();
       else
-         error("syntax error 1");
+         error("syntax error");
    }
 
    public Prog program() throws IOException { // program -> block
@@ -101,13 +101,13 @@ public class Parser {
          Stmt.Enclosing = fornode;
          match(Tag.FOR);
          match('(');
-         s = stmt();
+         s = assign();
          x = allexpr();
          while (true) {
             if (stmt() == Stmt.Null)
                break;
          }
-         s1 = assign1();
+         s1 = incdecexpr();
          match(')');
          s2 = stmt();
          fornode.init(s, x, s1, s2);
@@ -163,16 +163,10 @@ public class Parser {
       if (id == null)
          error(t.toString() + " undeclared");
       if (look.tag == '+' || look.tag == '-') {
-         int temp = look.tag;
          move();
-         if (look.tag == temp) {
-            Token tok = look;
-            Incdecexpr o = new Incdecexpr(tok);
-            stmt = new Incdec(id, o, o);
-            move();
-            match(';');
-            return stmt;
-         }
+         stmt = new Incdec(id, allexpr());
+         match(';');
+         return stmt;
       }
       move();
       stmt = new Set(id, allexpr()); // S -> id = E ;
@@ -180,26 +174,15 @@ public class Parser {
       return stmt;
    }
 
-   Stmt assign1() throws IOException {
+   Stmt incdecexpr() throws IOException {
       Stmt stmt;
       Token t = look;
       match(Tag.ID);
       Id id = top.get(t);
       if (id == null)
          error(t.toString() + " undeclared");
-      if (look.tag == '+' || look.tag == '-') {
-         int temp = look.tag;
-         move();
-         if (look.tag == temp) {
-            Token tok = look;
-            Incdecexpr o = new Incdecexpr(tok);
-            stmt = new Incdec(id, o, o);
-            move();
-            return stmt;
-         }
-      }
       move();
-      stmt = new Set(id, allexpr()); // S -> id = E ;
+      stmt = new Incdec(id, allexpr());
       return stmt;
    }
 
@@ -271,6 +254,14 @@ public class Parser {
    Expr factor() throws IOException {
       Expr x = null;
       switch (look.tag) {
+      case '+':
+         x = new Incdecexpr(look);
+         move();
+         return x;
+      case '-':
+         x = new Incdecexpr(look);
+         move();
+         return x;
       case '(':
          move();
          x = allexpr();
