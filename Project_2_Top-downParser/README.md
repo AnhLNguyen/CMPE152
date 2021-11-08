@@ -27,10 +27,15 @@ Depending on whether you use command line or an IDE, follow one of the below two
 
     To run this program in command line:
 
-         java main.Main
-         // Input your text in one line
-         // For example:
-         // {int r; int dd; int a; int d;r = a; dd = d;while( dd <= r ) dd = 2*dd;}
+         method 1: java main.Main
+            // Input your text in one line
+            // For example:
+            //    {int r; int dd; int a; int d;r = a; dd = d;while( dd <= r ) dd = 2*dd;}
+
+         method 2: java main.Main < test_file
+            // Since test_file has two test inputs,
+            // please remove one
+            // and test one at a time.
 
 **Refer to below methods if you want to use IntelliJ application**
 
@@ -66,3 +71,10 @@ java main.Main < test_file
    (1) Under "Run"->"Edit Configurations", put main.Main as main class.
    Specify your test file in "Redirect input from".
    (2) Click "Run"->"Run Main"
+
+**Features that modified based on the sample code**
+
+1. Token definitions (ID, FOR, and INCDECEXPR)
+2. Type checking
+3. Self-increment and decrement expression
+4. For loop

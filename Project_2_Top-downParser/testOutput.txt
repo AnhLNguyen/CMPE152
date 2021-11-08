@@ -1,0 +1,52 @@
+Syntax tree:
++--PROGRAM
+|  +--BLOCK
+|  |  +--STMTS        
+|  |  |  +--ASSIGN    
+|  |  |  |  +--Token r
+|  |  |  |  +--Token a
+|  |  |  +--STMTS     
+|  |  |  |  +--ASSIGN 
+|  |  |  |  |  +--Token dd
+|  |  |  |  |  +--Token d
+|  |  |  |  +--STMTS
+|  |  |  |  |  +--WHILE
+|  |  |  |  |  |  +--Token <=
+|  |  |  |  |  |  |  +--Token dd
+|  |  |  |  |  |  |  +--Token r
+|  |  |  |  |  |  +--ASSIGN
+|  |  |  |  |  |  |  +--Token dd
+|  |  |  |  |  |  |  +--Token *
+|  |  |  |  |  |  |  |  +--Token 2
+|  |  |  |  |  |  |  |  +--Token dd
+|  |  |  |  |  +--
+
+Syntax tree:
++--PROGRAM
+|  +--BLOCK
+|  |  +--STMTS
+|  |  |  +--ASSIGN
+|  |  |  |  +--Token r
+|  |  |  |  +--Token a
+|  |  |  +--STMTS
+|  |  |  |  +--ASSIGN
+|  |  |  |  |  +--Token dd
+|  |  |  |  |  +--Token d
+|  |  |  |  +--STMTS
+|  |  |  |  |  +--FOR
+|  |  |  |  |  |  +--ASSIGN
+|  |  |  |  |  |  |  +--Token i
+|  |  |  |  |  |  |  +--Token 0
+|  |  |  |  |  |  +--Token <=
+|  |  |  |  |  |  |  +--Token i
+|  |  |  |  |  |  |  +--Token r
+|  |  |  |  |  |  +--INCDECEXPR
+|  |  |  |  |  |  |  +--Token i
+|  |  |  |  |  |  |  +--Token +
+|  |  |  |  |  |  |  +--Token +
+|  |  |  |  |  |  +--ASSIGN
+|  |  |  |  |  |  |  +--Token dd
+|  |  |  |  |  |  |  +--Token *
+|  |  |  |  |  |  |  |  +--Token 2
+|  |  |  |  |  |  |  |  +--Token dd
+|  |  |  |  |  +--

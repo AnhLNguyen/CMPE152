@@ -4,6 +4,12 @@
     while( dd <= r ) dd = 2*dd;
 }
 
+{
+    int r; int dd; int a; int d; int i;
+    r = a; dd = d;
+    for(i=0; i<=r; i++) dd = 2*dd;
+}
+
 {int r; int dd; int a; int d;r = a; dd = d;while(dd<=r) dd = 2*dd;}
 {bool a;{float a; a = 1.6;} {a = 1.6;}}
 {int r; int dd; int a; int d;r = a; dd = d; do {dd = 2*dd;} while( dd <= r );}
